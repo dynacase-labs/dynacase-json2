@@ -1,0 +1,45 @@
+# ============================================
+# $Id: Makefile.in,v 1.2 2010-03-11 12:31:46 eric Exp $
+# ============================================
+PACKAGE = @PACKAGE@
+VERSION = @VERSION@
+utildir=@PUBRULE@
+pubdir = @prefix@
+srcdir = @srcdir@
+appname = lib/@APPNAME@
+libdir = $(pubdir)/lib
+
+export pubdir utildir
+
+TAR = tar
+GZIP_ENV = --best
+
+export targetdir PACKAGE
+
+pages_not_xml = info.xml
+pages_not_js = json2-debug.js
+pages_not_php = jsmin.php
+
+include $(utildir)/PubRule
+
+TRANSODS = 
+DISTFILES +=	$(wildcard *.in)	\
+		VERSION RELEASE info.xml\
+
+$(libdir):
+	mkdir -p $@
+
+$(libdir)/json2: $(libdir)
+	mkdir -p $@
+
+$(libdir)/json2/json2-debug.js: json2-debug.js $(libdir)/json2
+	cp $< $@
+
+$(libdir)/json2/json2.js: $(libdir)/json2/json2-debug.js
+	php jsmin.php $< $@
+
+publish: $(libdir)/json2/json2.js
+
+clean:
+	/bin/rm -f *.*~ config.* Makefile configure info.xml $(PACKAGE)-*webinst
+	/bin/rm -fr autom4te.cache
