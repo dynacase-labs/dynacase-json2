@@ -1,17 +1,6 @@
 <?xml version="1.0"?>
-<module name="@PACKAGE@" disabled="no" version="@VERSION@"
-    release="@RELEASE@" license="@LICENSE@">
+<module name="@PACKAGE@" version="@VERSION@" release="@RELEASE@" license="http://www.gnu.org/licenses/lgpl-3.0.txt GNU Lesser General Public License v3.0">
 
-    <description>Json management for older browser.
-    </description>
-
-    <requires>
-    </requires>
-
-    <post-install>
-    </post-install>
-
-    <post-upgrade>
-    </post-upgrade>
+    <description>Json management for older browser.</description>
 
 </module>
